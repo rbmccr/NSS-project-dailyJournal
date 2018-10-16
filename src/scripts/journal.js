@@ -31,14 +31,29 @@ const container = document.querySelector(".entryLog");
 const makeJournalEntryComponent = function(journalEntry) {
   return `
     <section class="entry--posted"> 
-      <h1>${journalEntry.concept}</h1>
-      <h2>${journalEntry.date}</h2>
+      <h2>${journalEntry.concept}</h1>
+      <hp>${journalEntry.date}</p> 
       <p>${journalEntry.entry}</p>
       <footer>${journalEntry.mood}</footer>
     </section>
   `
 }
 
+// loop each object in the journalEntries array, and use an
+// anonymous arrow function to build and append each entry
+// to the DOM
+function renderJournalEntries(array) {
+  array.forEach(journalEntry => {
+    container.innerHTML += makeJournalEntryComponent(journalEntry);
+  });
+}
+
+renderJournalEntries(journalEntries);
+
+// The method below works, too. It appends an array to the DOM instead
+// of individual elements one after another
+
+/*
 function renderJournalEntries(entries) {
   // define empty array to hold DOM data from function called in loop
   let arr = [];
@@ -49,7 +64,8 @@ function renderJournalEntries(entries) {
   // reverse order to get recent entries first
   arr = arr.reverse().join('<br />');
   // append DOM content to container
-  container.innerHTML += arr;
+  container.innerHTML = arr;
 }
+*/
 
-renderJournalEntries(journalEntries);
+// renderJournalEntries(journalEntries);
